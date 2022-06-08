@@ -1,0 +1,101 @@
+{
+  "type": "CityJSONExtension",
+  "name": "Dynamizer",
+  "description": "Extension to model dynamic attributes",
+  "uri": "https://github.com/1khawla/humidite.git",
+  "version":"1.0",
+  "versionCityJSON":"1.1",
+  "Definitions":{
+    "Dynamizer":{
+      "properties":{
+        "Dynamizer-id":{
+          "type":"string",
+          "value":""
+        },
+        "attributeRef":{
+          "description":"It refers to a specific attribute of a specific city object by using an XPath expression. This is the static property that should be overridden by timeseries data",
+          "uri":""
+        },
+        "startTime":{
+          "type":"string",
+          "value":""
+        },
+        "endTime":{
+          "type":"string",
+          "value":""
+        },
+        "sensorConnection":{
+          "properties":{
+            "sensorId":{
+              "type":"string",
+              "value":""
+            },
+            "serviceType":{
+              "type":"string",
+              "value":""
+            },
+            "sensorLocation":{
+              "description":"It indicates that the sensor is attached to the building by a spacific city object",
+              "type":"object",
+              "value":""
+            },
+            "linkToObservation":{
+              "description":"link to observation response",
+              "uri":""
+            },
+            "linkToSensor":{
+              "description":"link to the description/metadata of the sensor device",
+              "uri":""
+            }
+          },
+          "DynamicData":{
+            "type":{
+              "AtomicTimeseries":{
+                "properties":{
+                  "time":{
+                    "type":"string",
+                    "value":""
+                  },
+                  "value":{
+                    "type":"number"
+                  }
+                }
+              },
+              "CompositeTimeseries":{
+                "properties":{
+                  "TimeseriesComponent":{
+                    "type":"number",
+                    "value":""
+                  },
+                  "AtomicTimeseries":{
+                    "properties":{
+                      "BaseTime":{
+                        "type":"string",
+                        "value":"00:00:00"
+                      },
+                      "spacing":{
+                        "type":"string"
+                      },
+                      "value":{
+                        "type":"number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "extraRootProperties": {},
+  "extraAttributes": {
+    "Building":{
+      "+Dynamizer":{
+        "$ref": "#/definitions/Dynamizer"
+      }
+    }
+  },
+  "extraCityObjects": {}
+}
