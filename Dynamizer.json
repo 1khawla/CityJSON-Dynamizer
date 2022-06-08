@@ -2,7 +2,7 @@
   "type": "CityJSONExtension",
   "name": "Dynamizer",
   "description": "Extension to model dynamic attributes",
-  "uri": "https://github.com/1khawla/humidite.git",
+  "uri": "https://github.com/1khawla/CityJSON-Dynamizer/blob/main/Dynamizer.json",
   "version":"1.0",
   "versionCityJSON":"1.1",
   "Definitions":{
