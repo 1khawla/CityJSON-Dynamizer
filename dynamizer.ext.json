@@ -1,0 +1,162 @@
+{
+  "type": "CityJSONExtension",
+  "name": "dynamizer",
+  "description": "Extension to model dynamic attributes",
+  "uri": "https://github.com/1khawla/CityJSON-Dynamizer/blob/main/dynamizer.ext.json",
+  "version":"1.0",
+  "versionCityJSON":"1.1",
+  "definitions":{
+    "sensor-connection":{
+      "properties":{
+        "sensor-id":{
+          "type":"string"
+        },
+        "service-type":{
+          "type":"string"
+        },
+        "sensor-location":{
+          "description":"It indicates that the sensor is attached to the building by a specific city object",
+          "type":"object"
+        },
+        "link-to-observation":{
+          "description":"link to observation response",
+          "uri":"localhost:3001/temperature"
+        },
+        "link-to-sensor":{
+          "description":"link to the description/metadata of the sensor device",
+          "uri":"localhost:3001/info"
+        }
+      }
+    },
+    "dynamicdata-dr":{
+      "type":"number"
+    },
+    "dynamicdata-tvp":{
+      "type":"number"
+    },
+    "observationdata":{
+      "type":"number"
+    },
+    "atomic-timeseries":{
+      "properties":{
+        "type":{
+          "type1":{
+            "$ref": "#/definitions/dynamicdata-dr"
+          },
+          "type2":{
+            "$ref": "#/definitions/dynamicdata-tvp"
+          },
+          "type3":{
+            "$ref": "#/definitions/observationdata"
+          }
+        },
+        "time":{
+          "type":"string"
+        },
+        "value":{
+          "type":"number"
+        }
+      }
+    },
+    "timeseriescomponent":{
+      "properties":{
+        "repetitions":{
+          "type":"number"
+        },
+        "additionalgap":{
+          "description":"it allows two nonoverlapping timeseries that have been separately collected to connect in order to make a single timeseries",
+          "type":"string"
+        }
+      }
+    },
+    "composite-timeseries":{
+      "properties":{
+        "timeseriescomponent":{
+          "$ref": "#/definitions/timeseriescomponent"
+        },
+        "atomictimeseries":{
+          "properties":{
+            "def":{
+              "$ref": "#/definitions/atomic-timeseries"
+            },
+            "base-time":{
+              "type":"string",
+              "value":"00:00:00"
+            },
+            "spacing":{
+              "type":"string"
+            },
+            "value":{
+              "type":"number"
+            }
+          }
+        }
+      }
+    },
+    "timeseries":{
+      "type":{
+        "type1":{
+          "$ref": "#/definitions/atomic-timeseries"
+        },
+        "type2":{
+          "$ref": "#/definitions/composite-timeseries"
+        }
+      },
+      "value":{
+        "type":"number"
+      }
+    },
+    "abstract-dynamizer-cityobject":{
+      "type":"object"
+    },
+    "dynamizer":{
+      "properties":{
+        "dynamizer-id":{
+          "type":"string"
+        },
+        "attribute-ref":{
+          "description":"It refers to a specific attribute of a specific city object by using an XPath expression. This is the static property that should be overridden by timeseries data",
+          "uri":""
+        },
+        "start-time":{
+          "type":"string"
+        },
+        "end-time":{
+          "type":"string"
+        },
+        "linktosensor":{
+          "$ref": "#/definitions/sensor-connection"
+        }
+      }
+    },
+    "dynamic-attribute":{
+      "type":"object",
+      "properties":{
+        "value":{
+          "$ref": "#/definitions/timeseries"
+        },
+        "uom":{
+          "type":"string"
+        },
+        "connection":{
+          "$ref": "#/definitions/dynamizer"
+        }
+      },
+      "required":[
+        "value",
+        "uom",
+        "connection"    
+      ],
+      "additionalProperties":false
+    }
+  },
+  "extraRootProperties": {},
+  "extraAttributes": {
+    "_AbstractCityObject":{
+      "+dynamicattribute":{
+        "$ref": "#/definitions/dynamic-attribute"
+      }
+    }
+  },
+  "extraCityObjects": {}
+}
