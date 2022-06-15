@@ -40,7 +40,7 @@
     "CompositeTimeseries": {
       "properties": {
         "BaseTime": {
-          "type": "string",   
+          "type": "string"
         },
         "spacing":{
           "type": "string"
