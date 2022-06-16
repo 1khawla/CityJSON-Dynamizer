@@ -16,11 +16,15 @@
         },
         "linkToObservation": {
           "description": "link to observation response",
-          "uri": "uri-reference"
+          "uri": {
+            "type": "string"
+          }  
         },
         "linkToSensor": {
           "description": "link to the description/metadata of the sensor device",
-          "uri": "uri-reference"
+          "uri": {
+            "type": "string"
+          }  
         },
         "sensorLocation": {
           "$ref": "cityobjects.schema.json#/_AbstractCityObject"
@@ -88,7 +92,9 @@
         "properties": {
           "attributeRef": {
             "description": "It refers to a specific attribute of a specific city object by using an XPath expression. This is the static property that should be overridden by timeseries data",
-            "uri": "uri-reference"
+            "uri": {
+              "type": "string"
+            }  
           },
           "startTime": {
             "type": "string"
