@@ -120,7 +120,7 @@
         "type": "object",
         "properties": {
           "attributeRef": {
-            "description": "It refers to a specific attribute of a specific city object by using an XPath expression. This is the static property that should be overridden by timeseries data",
+            "description": "It refers to a specific attribute of a specific city object by using an uri expression. This is the static property that should be overridden by timeseries data",
             "uri": {
               "type": "string"
             }  
