@@ -31,33 +31,62 @@
         }
       }
     },
-    "AtomicTimeseries": {
-      "properties": {
-        "time": {
-          "type": "string"
-        },
-        "value": {
-          "type": "number"
-        }
+    "dynamicData-DR": {
+      "time": {
+        "type": "string"
+      },
+      "value": {
+        "type":"number"
       }
+    },
+    "dynamicData-TVP": {
+      "time": {
+        "type": "string"
+      },
+      "value": {
+        "type": "number"
+      }
+    },
+    "observationData": {
+      "time": {
+        "type": "string"
+      },
+      "value": {
+        "type": "number"
+      }
+    },
+    "AtomicTimeseries": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/dynamicData-DR"
+        },
+        {
+          "$ref": "#/definitions/dynamicData-TVP"
+        },
+        {
+          "$ref": "#/definitions/observationData"
+        }
+      ]
     },
     "CompositeTimeseries": {
       "properties": {
         "BaseTime": {
           "type": "string"
         },
-        "spacing":{
+        "spacing": {
           "type": "string"
         },
-        "timeseriesComponent":{
+        "timeseriesComponent": {
           "repetitions": {
             "type": "number"
           },
           "AdditionalGap": {
             "type": "string"
-        },
-        "value":{
-          "type": "array"
+          },
+          "type": "array",
+          "value": {
+            "$ref": "#/definitions/AtomicTimeseries"
+          }
         }
       }
     },
