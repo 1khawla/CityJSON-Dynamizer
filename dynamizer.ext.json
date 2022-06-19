@@ -3,8 +3,8 @@
   "name": "dynamizer",
   "description": "Extension to model dynamic attributes",
   "uri": "https://github.com/1khawla/CityJSON-Dynamizer/blob/main/dynamizer.ext.json",
-  "version":"1.0",
-  "versionCityJSON":"1.1",
+  "version": "1.0",
+  "versionCityJSON": "1.1",
   "definitions": {
     "SensorConnection": {
       "properties": {
@@ -36,7 +36,7 @@
         "type": "string"
       },
       "value": {
-        "type":"number"
+        "type": "number"
       }
     },
     "dynamicData-TVP": {
