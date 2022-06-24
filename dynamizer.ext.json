@@ -17,13 +17,15 @@
         "linkToObservation": {
           "description": "link to observation response",
           "uri": {
-            "type": "string"
+            "type": "string",
+            "format": "uri-reference"
           }  
         },
         "linkToSensor": {
           "description": "link to the description/metadata of the sensor device",
           "uri": {
-            "type": "string"
+            "type": "string",
+            "format": "uri-reference"
           }  
         },
         "sensorLocation": {
@@ -31,21 +33,11 @@
         }
       }
     },
-    "dynamicData-DR": {
-      "time": {
-        "type": "string"
-      },
-      "value": {
-        "type": "number"
-      }
+    "dynamicDataDR": {
+      "$ref": "http://www.opengis.net/def/timeseriesType/timeseriesML/TimeseriesDomainRange"
     },
-    "dynamicData-TVP": {
-      "time": {
-        "type": "string"
-      },
-      "value": {
-        "type": "number"
-      }
+    "dynamicDataTVP": {
+      "$ref": "http://www.opengis.net/def/timeseriesType/timeseriesML/TimeseriesTimeValuePair"
     },
     "observationData": {
       "time": {
@@ -58,10 +50,10 @@
     "AtomicTimeseries": {
       "oneOf": [
         {
-          "$ref": "#/definitions/dynamicData-DR"
+          "$ref": "#/definitions/dynamicDataDR"
         },
         {
-          "$ref": "#/definitions/dynamicData-TVP"
+          "$ref": "#/definitions/dynamicDataTVP"
         },
         {
           "$ref": "#/definitions/observationData"
@@ -75,61 +67,78 @@
         },
         "spacing": {
           "type": "string"
+        }
+      }
+    },
+    "timeseriesComponent": {
+      "type": "object",
+      "properties": {
+        "repetitions": {
+          "type": "integer"
         },
-        "timeseriesComponent": {
-          "repetitions": {
-            "type": "number"
-          },
-          "AdditionalGap": {
-            "type": "string"
-          },
-          "type": "array",
-          "value": {
-            "$ref": "#/definitions/AtomicTimeseries"
-          }
+        "additionalGap": {
+          "$ref": "http://www.opengis.net/def/objectType/ISO-19108/2002/TM_Period"
+        },
+        "component": {
+          "$ref": "#/definitions/CompositeTimeseries"
         }
       }
     },
     "_AbstractTimeseries": {
       "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/AtomicTimeseries"
+        },
+        {
+          "$ref": "#/definitions/CompositeTimeseries"
+        }
+      ],
       "properties": {
         "timeseries": {
-          "description": "It contains dynamic data to model",
-          "type": "number",
-          "subclass": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/AtomicTimeseries"
-              },
-              {
-                "$ref": "#/definitions/CompositeTimeseries"
-              }
-            ]
-          },
-          "linkToObservation": {
-            "$ref": "#/definitions/SensorConnection"
-          }
+          "$ref": "#/definitions/TimeseriesComponent"
         }
       }
+    },
+    "TM_Position": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "string",
+          "format": "time"
+        },
+        {
+          "type": "string",
+          "format": "date-time"
+        }
+      ]
     }
   },
   "extraRootProperties": {},
   "extraAttributes": {
     "_AbstractCityObject": {
-      "+dynamizer": {
+      "+Dynamizer": {
         "type": "object",
         "properties": {
           "attributeRef": {
             "description": "It refers to a specific attribute of a specific city object by using an uri expression. This is the static property that should be overridden by timeseries data",
             "uri": {
-              "type": "string"
+              "type": "string",
+              "format": "uri-reference"
             }  
           },
           "startTime": {
-            "type": "string"
+            "$ref": "#/definitions/TM_Position"
           },
           "endTime": {
-            "type": "string"
+            "$ref": "#/definitions/TM_Position"
           },
           "linkToSensor": {
             "$ref": "#/definitions/SensorConnection"
