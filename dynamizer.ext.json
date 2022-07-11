@@ -1,6 +1,6 @@
 {
   "type": "CityJSONExtension",
-  "name": "dynamizer",
+  "name": "Dynamizer",
   "description": "Extension to model dynamic attributes",
   "uri": "https://github.com/1khawla/CityJSON-Dynamizer/blob/main/dynamizer.ext.json",
   "version": "1.0",
@@ -123,8 +123,8 @@
   },
   "extraRootProperties": {},
   "extraAttributes": {
-    "_AbstractCityObject": {
-      "+Dynamizer": {
+    "_Building": {
+      "+dynamizer": {
         "type": "object",
         "properties": {
           "attributeRef": {
