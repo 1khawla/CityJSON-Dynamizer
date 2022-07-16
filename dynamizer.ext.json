@@ -124,7 +124,7 @@
   "extraRootProperties": {},
   "extraAttributes": {
     "_Building": {
-      "+dynamizer": {
+      "+Dynamizer": {
         "type": "object",
         "properties": {
           "attributeRef": {
